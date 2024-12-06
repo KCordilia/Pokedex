@@ -12,21 +12,25 @@ struct HomeView: View {
     
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(viewModel.pokemons, id: \.name) { pokemon in
-                    PokemonCard(pokemon: pokemon)
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(viewModel.pokemons, id: \.name) { pokemon in
+                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
+                            PokemonCard(pokemon: pokemon)
+                        }
+                    }
+                }
+                .padding()
+                
+            }
+            .onAppear() {
+                Task {
+                    await viewModel.fetchPokemons()
                 }
             }
-            .padding()
-            
+            .environmentObject(viewModel)
         }
-        .onAppear() {
-            Task {
-                await viewModel.fetchPokemons()
-            }
-        }
-        .environmentObject(viewModel)
     }
 }
 

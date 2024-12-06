@@ -13,14 +13,13 @@ struct MockData {
         let mockViewModel = HomeViewModel()
         
         mockViewModel.pokemons = [
-            Pokemon(name: "Bulbasaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/1/")!)
+            Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)
         ]
         
         mockViewModel.pokemonDetail = [
-            "Bulbasaur": PokemonDetail(
+            "Charmeleon": PokemonDetail(
                 types: [
-                    PokemonTypes(type: PokemonType(name: "Grass", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!)),
-                    PokemonTypes(type: PokemonType(name: "Poison", url: URL(string: "https://pokeapi.co/api/v2/type/4/")!))
+                    PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
                 ],
                 sprites: PokemonSprites(
                     front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png")!
@@ -32,6 +31,6 @@ struct MockData {
     }
     
     static func createSamplePokemon() -> Pokemon {
-        return Pokemon(name: "Bulbasaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/1/")!)
+        return Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)
     }
 }
