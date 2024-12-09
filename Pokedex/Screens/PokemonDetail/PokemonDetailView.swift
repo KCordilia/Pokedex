@@ -12,7 +12,11 @@ struct PokemonDetailView: View {
     let types: [PokemonTypes]
     
     var body: some View {
-        DetailHeaderView(pokemon: pokemon, types: types)
+        VStack {
+            ZStack {
+                DetailHeaderView(pokemon: pokemon, types: types)
+            }
+        }
     }
 }
 

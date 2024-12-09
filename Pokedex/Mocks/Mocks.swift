@@ -35,6 +35,7 @@ struct MockData {
     }
     
     static func createSampleTypes() -> [PokemonTypes] {
-        return [.init(type: .init(name: "fire", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!))]
+        return [.init(type: .init(name: "fire", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!)),
+                .init(type: .init(name: "Poison", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!))]
     }
 }
