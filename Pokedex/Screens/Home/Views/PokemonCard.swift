@@ -18,12 +18,7 @@ struct PokemonCard: View {
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(Color.white)
                 ForEach(viewModel.getTypes(for: pokemon), id: \.type.name) { type in
-                    Text(type.name.capitalized)
-                        .frame(width: 60, height: 25)
-                        .background(TypeColorMapper.getTypeColor(for: type.name))
-                        .clipShape(.capsule)
-                        .font(.system(size: 12, weight: .regular))
-                        .foregroundColor(Color.white)
+                    TypeView(type: type.name)
                 }
             }
             

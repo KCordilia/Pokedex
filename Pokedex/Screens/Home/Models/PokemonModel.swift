@@ -25,6 +25,7 @@ struct Pokemon: Codable {
 }
 
 struct PokemonDetail: Codable {
+    let id: Int
     let types: [PokemonTypes]
     let sprites: PokemonSprites
 }

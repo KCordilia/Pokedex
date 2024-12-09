@@ -18,7 +18,7 @@ struct MockData {
         
         mockViewModel.pokemonDetail = [
             "Charmeleon": PokemonDetail(
-                types: [
+                id: 5, types: [
                     PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
                 ],
                 sprites: PokemonSprites(
@@ -32,5 +32,9 @@ struct MockData {
     
     static func createSamplePokemon() -> Pokemon {
         return Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)
+    }
+    
+    static func createSampleTypes() -> [PokemonTypes] {
+        return [.init(type: .init(name: "fire", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!))]
     }
 }
