@@ -26,11 +26,6 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func fetchPokemonImage(for id: Int) -> URL? {
-        guard let url = APIEndpoint.getImageUrl(id).url else { return nil }
-        return url
-    }
-    
     func getTypes(for pokemon: Pokemon) -> [PokemonTypes] {
         guard let types = pokemonDetail[pokemon.name]?.types else { return [] }
         return types

@@ -16,7 +16,7 @@ struct HomeView: View {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.pokemons, id: \.name) { pokemon in
-                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon, types: viewModel.getTypes(for: pokemon))) {
+                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
                             PokemonCard(pokemon: pokemon)
                         }
                     }

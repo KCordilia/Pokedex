@@ -18,11 +18,15 @@ struct MockData {
         
         mockViewModel.pokemonDetail = [
             "Charmeleon": PokemonDetail(
-                id: 5, types: [
+                id: 5, name: "Charmeleon", types: [
                     PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
                 ],
                 sprites: PokemonSprites(
-                    front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png")!
+                    other: OtherSprites(
+                        officialArtwork: OfficialArtwork(
+                            front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
+                        )
+                    )
                 )
             )
         ]
@@ -37,5 +41,18 @@ struct MockData {
     static func createSampleTypes() -> [PokemonTypes] {
         return [.init(type: .init(name: "fire", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!)),
                 .init(type: .init(name: "Poison", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!))]
+    }
+    
+    static func createSamplePokemonDetail() -> PokemonDetail {
+        return PokemonDetail(id: 5, name: "Charmeleon", types: [
+            PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
+        ], sprites: PokemonSprites(
+            other: OtherSprites(
+                officialArtwork: OfficialArtwork(
+                    front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
+                )
+            )
+        )
+        )
     }
 }

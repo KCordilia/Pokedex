@@ -23,26 +23,3 @@ struct Pokemon: Codable {
         APIEndpoint.getImageUrl(id).url
     }
 }
-
-struct PokemonDetail: Codable {
-    let id: Int
-    let types: [PokemonTypes]
-    let sprites: PokemonSprites
-}
-
-struct PokemonSprites: Codable {
-    let front_default: URL
-}
-
-struct PokemonTypes: Codable {
-    let type: PokemonType
-    
-    var name: String {
-        return type.name
-    }
-}
-
-struct PokemonType: Codable {
-    let name: String
-    let url: URL
-}
