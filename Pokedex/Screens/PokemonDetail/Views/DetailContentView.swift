@@ -9,17 +9,23 @@ import SwiftUI
 
 struct DetailContentView: View {
     let pokemonDetail: PokemonDetail
+    @State private var selectedSegment: DetailSegment = .about
     
     var body: some View {
         ZStack(alignment: .top) {
             VStack(spacing: 16) {
                 VStack(spacing: 8) {
-                    Text("Overlay Content")
-                        .font(.headline)
-                    Text("Additional Info")
-                        .font(.body)
-                    Text("Additional Info")
-                        .font(.body)
+                    SegmentedControlView(segments: DetailSegment.allCases.map {$0.rawValue})
+                    Group {
+                        switch selectedSegment {
+                        case .about:
+                            AboutView()
+                        case .baseStats:
+                            BasteStatsView()
+                        case .moves:
+                            MovesView()
+                        }
+                    }
                 }
                 .padding()
                 .padding(.top, 40)
@@ -27,19 +33,18 @@ struct DetailContentView: View {
                 .background(Color.white)
                 .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
             }
-                .padding(.top, 150) // Adjust to control overlap dynamically
-            
-            AsyncImage(url: pokemonDetail.sprites.other.officialArtwork.front_default) { image in
-                if let image = image.image {
-                    image
+            .padding(.top, 150) // Adjust to control overlap dynamically
+            .background(
+                HStack {
+                    Spacer()
+                    Image("pokeball")
                         .resizable()
-                        .scaledToFit()
-                        .frame(height: 200)
-                        .shadow(radius: 10)
-                } else {
-                    ProgressView()
+                        .frame(width: 175, height: 175)
+                        .opacity(0.2)
+                        .offset(x: 20, y: -65)
                 }
-            }
+            )
+            PokemonImageView(url: pokemonDetail.sprites.other.officialArtwork.front_default)
         }
     }
 }

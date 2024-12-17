@@ -22,24 +22,27 @@ struct PokemonCard: View {
                 }
             }
             
-            Image("pokeball")
-                .resizable()
-                .frame(width: 70, height: 70)
-                .opacity(0.1)
-                .offset(x: 10, y: 15)
-                .overlay {
-                    AsyncImage(url: pokemon.spriteUrl) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .offset(x:10, y: 15)
-                    } placeholder: {
-                        ProgressView()
-                            .frame(width: 75, height: 75)
-                    }
-                }
+            AsyncImage(url: pokemon.spriteUrl) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 80, height: 80)
+            } placeholder: {
+                ProgressView()
+                    .frame(width: 75, height: 75)
+            }
         }
         .frame(width: 175, height: 110)
+        .background(
+            HStack {
+                Spacer()
+                Image("pokeball")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .opacity(0.2)
+                    .offset(x: 20, y: 20)
+            }
+        )
         .background(.ultraThinMaterial)
         .background(TypeColorMapper.getTypeColor(for: viewModel.getTypes(for: pokemon).first?.name ?? ""))
         .clipShape(RoundedRectangle(cornerRadius: 10))

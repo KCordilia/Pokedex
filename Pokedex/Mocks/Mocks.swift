@@ -18,7 +18,9 @@ struct MockData {
         
         mockViewModel.pokemonDetail = [
             "Charmeleon": PokemonDetail(
-                id: 5, name: "Charmeleon", types: [
+                id: 5,
+                name: "Charmeleon",
+                types: [
                     PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
                 ],
                 sprites: PokemonSprites(
@@ -27,7 +29,11 @@ struct MockData {
                             front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
                         )
                     )
-                )
+                ),
+                abilities: [],
+                stats: [],
+                height: 7,
+                weight: 69
             )
         ]
         
@@ -44,15 +50,29 @@ struct MockData {
     }
     
     static func createSamplePokemonDetail() -> PokemonDetail {
-        return PokemonDetail(id: 5, name: "Charmeleon", types: [
-            PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
-        ], sprites: PokemonSprites(
-            other: OtherSprites(
-                officialArtwork: OfficialArtwork(
-                    front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
+        return PokemonDetail(
+            id: 5,
+            name: "Charmeleon",
+            types: [
+                PokemonTypes(type: PokemonType(name: "Fire",
+                                               url: URL(string: "https://pokeapi.co/api/v2/type/12/")!
+                                              )
                 )
-            )
+            ], sprites: PokemonSprites(
+                other: OtherSprites(
+                    officialArtwork: OfficialArtwork(
+                        front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
+                    )
+                )
+            ),
+            abilities: [],
+            stats: [],
+            height: 7,
+            weight: 69
         )
-        )
+    }
+    
+    static func createMockSegments() -> [String] {
+        return ["About", "Base Stats", "Moves"]
     }
 }

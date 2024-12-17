@@ -30,6 +30,7 @@ struct HomeView: View {
                 }
             }
             .environmentObject(viewModel)
+            .navigationTitle("Pokedex")
         }
     }
 }
