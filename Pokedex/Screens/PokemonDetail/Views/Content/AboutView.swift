@@ -11,35 +11,20 @@ struct AboutView: View {
     let pokemonDetail: PokemonDetail
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 30) {
-                Text("Height")
-                    .font(.system(size: 13))
-                    .foregroundColor(Color.gray)
-                    .frame(width: 80, alignment: .leading)
-                Text("\(pokemonDetail.height) cm")
-                    .font(.system(size: 13))
+        HStack {
+            VStack(alignment: .leading, spacing: 8) {
+                PokemonInfoHeaderText("Height")
+                PokemonInfoHeaderText("Weight")
+                PokemonInfoHeaderText("Abilities")
             }
-            HStack(spacing: 30) {
-                Text("Weight")
-                    .font(.system(size: 13))
-                    .foregroundColor(Color.gray)
-                    .frame(width: 80, alignment: .leading)
-                Text("\(pokemonDetail.weight) kg")
-                    .font(.system(size: 13))
+            Spacer()
+            VStack(alignment: .leading, spacing: 8) {
+                PokemonInfoValueText("\(pokemonDetail.formattedHeight)")
+                PokemonInfoValueText("\(pokemonDetail.formattedWeight)")
+                PokemonInfoValueText(pokemonDetail.abilities.map { $0.ability.name.capitalized }.joined(separator: ", "))
             }
-            
-            HStack(spacing: 30) {
-                Text("Abilities")
-                    .font(.system(size: 13))
-                    .foregroundColor(Color.gray)
-                    .frame(width: 80, alignment: .leading)
-                Text(pokemonDetail.abilities.map { $0.ability.name.capitalized }.joined(separator: ", "))
-                    .font(.system(size: 13))
-            }
-            
         }
-//        .frame(maxWidth: .infinity)
+        .padding()
     }
 }
 

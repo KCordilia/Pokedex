@@ -26,6 +26,7 @@ struct DetailContentView: View {
                     switch selectedSegment {
                     case .about:
                         AboutView(pokemonDetail: pokemonDetail)
+                            .frame(maxWidth: .infinity)
                     case .baseStats:
                         BaseStatsView()
                     case .moves:

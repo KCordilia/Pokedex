@@ -75,3 +75,15 @@ enum DetailSegment: String, CaseIterable {
     case baseStats = "Base Stats"
     case moves = "Moves"
 }
+
+extension PokemonDetail {
+    var formattedHeight: String {
+        let heightInMeters = Double(height) / 10.0
+        return String(format: "%.1f m", heightInMeters)
+    }
+    
+    var formattedWeight: String {
+        let weightInKilograms = Double(weight) / 10.0
+        return String(format: "%.1f kg", weightInKilograms)
+    }
+}
