@@ -13,27 +13,31 @@ struct DetailContentView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 16) {
                 VStack(spacing: 8) {
-                    SegmentedControlView(segments: DetailSegment.allCases.map {$0.rawValue})
-                    Group {
-                        switch selectedSegment {
-                        case .about:
-                            AboutView()
-                        case .baseStats:
-                            BasteStatsView()
-                        case .moves:
-                            MovesView()
-                        }
+                    SegmentedControlView(
+                        segments: DetailSegment.allCases.map {$0.rawValue},
+                        selectedIndex: Binding(
+                            get: { DetailSegment.allCases.firstIndex(of: selectedSegment) ?? 0},
+                            set: { selectedSegment = DetailSegment.allCases[$0] }
+                        )
+                    )
+                    
+                    switch selectedSegment {
+                    case .about:
+                        AboutView(pokemonDetail: pokemonDetail)
+                    case .baseStats:
+                        BaseStatsView()
+                    case .moves:
+                        MovesView()
                     }
                 }
                 .padding()
                 .padding(.top, 40)
-                .frame(maxWidth: .infinity)
                 .background(Color.white)
                 .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
             }
-            .padding(.top, 150) // Adjust to control overlap dynamically
+            .padding(.top, 150)
             .background(
                 HStack {
                     Spacer()

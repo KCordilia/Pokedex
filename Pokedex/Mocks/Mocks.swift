@@ -30,7 +30,18 @@ struct MockData {
                         )
                     )
                 ),
-                abilities: [],
+                abilities: [
+                    Ability(
+                        ability: BaseAbility(
+                            name: "blaze"
+                        )
+                    ),
+                    Ability(
+                        ability: BaseAbility(
+                            name: "solar power"
+                        )
+                    )
+                ],
                 stats: [],
                 height: 7,
                 weight: 69
@@ -65,7 +76,18 @@ struct MockData {
                     )
                 )
             ),
-            abilities: [],
+            abilities: [
+                Ability(
+                    ability: BaseAbility(
+                        name: "blaze"
+                    )
+                ),
+                Ability(
+                    ability: BaseAbility(
+                        name: "solar power"
+                    )
+                )
+            ],
             stats: [],
             height: 7,
             weight: 69

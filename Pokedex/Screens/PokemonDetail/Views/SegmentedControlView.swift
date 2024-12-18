@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SegmentedControlView: View {
-    @State private var selectedIndex: Int = 0
     let segments: [String]
+    @Binding var selectedIndex: Int
     
     var body: some View {
         VStack {
@@ -22,29 +22,28 @@ struct SegmentedControlView: View {
                         }
                     }) {
                         Text(segments[index])
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundColor(selectedIndex == index ? .primary : .secondary)
-                            .frame(maxWidth: .infinity) // Equal spacing for all segments
+                            .frame(maxWidth: .infinity)
                     }
                 }
             }
             .padding(.bottom, 8)
             
-            // Highlight Bar
             GeometryReader { geometry in
                 let segmentWidth = geometry.size.width / CGFloat(segments.count)
                 Rectangle()
                     .fill(Color.blue)
-                    .frame(width: segmentWidth / 2, height: 3)
-                    .offset(x: CGFloat(selectedIndex) * segmentWidth + segmentWidth / 4)
+                    .frame(width: segmentWidth, height: 3)
+                    .offset(x: CGFloat(selectedIndex) * segmentWidth)
                     .animation(.easeInOut, value: selectedIndex)
             }
-            .frame(height: 3) // Fixed height for the bar
+            .frame(height: 3)
         }
         .padding()
     }
 }
 
 #Preview {
-    SegmentedControlView(segments: MockData.createMockSegments())
+    SegmentedControlView(segments: MockData.createMockSegments(), selectedIndex: .constant(0))
 }
