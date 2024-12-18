@@ -23,7 +23,7 @@ struct SegmentedControlView: View {
                     }) {
                         Text(segments[index])
                             .font(.system(size: 13, weight: .medium))
-                            .foregroundColor(selectedIndex == index ? .primary : .secondary)
+                            .foregroundColor(selectedIndex == index ? .black : .gray)
                             .frame(maxWidth: .infinity)
                     }
                 }

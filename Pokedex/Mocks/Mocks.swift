@@ -44,7 +44,11 @@ struct MockData {
                 ],
                 stats: [],
                 height: 7,
-                weight: 69
+                weight: 69,
+                cries: Cry(
+                    latest: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg")!,
+                    legacy: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/1.ogg")!
+                )
             )
         ]
         
@@ -90,7 +94,11 @@ struct MockData {
             ],
             stats: [],
             height: 7,
-            weight: 69
+            weight: 69,
+            cries: Cry(
+                latest: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg")!,
+                legacy: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/1.ogg")!
+            )
         )
     }
     

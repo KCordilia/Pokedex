@@ -16,6 +16,7 @@ struct PokemonDetail: Codable {
     let stats: [BaseStat]
     let height: Int
     let weight: Int
+    let cries: Cry
 }
 
 struct PokemonSprites: Codable {
@@ -68,6 +69,11 @@ struct BaseStat: Codable {
 
 struct Stat: Codable {
     let name: String
+}
+
+struct Cry: Codable {
+    let latest: URL?
+    let legacy: URL?
 }
 
 enum DetailSegment: String, CaseIterable {
