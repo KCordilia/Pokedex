@@ -27,16 +27,10 @@ struct AboutView: View {
                 }
             }
             .padding()
-            Button {
+            PlayButton(typeColor: pokemonDetail.types.first?.name ?? "") {
                 if let url = pokemonDetail.cries.latest {
                     cryPlayer.playCry(from: url)
                 }
-            } label: {
-                Text("Play Cry")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(Color.white)
-                    .clipShape(.capsule)
             }
         }
     }

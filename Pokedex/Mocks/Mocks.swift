@@ -11,47 +11,8 @@ import Foundation
 struct MockData {
     static func createMockHomeViewModel() -> HomeViewModel {
         let mockViewModel = HomeViewModel()
-        
-        mockViewModel.pokemons = [
-            Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)
-        ]
-        
-        mockViewModel.pokemonDetail = [
-            "Charmeleon": PokemonDetail(
-                id: 5,
-                name: "Charmeleon",
-                types: [
-                    PokemonTypes(type: PokemonType(name: "Fire", url: URL(string: "https://pokeapi.co/api/v2/type/12/")!))
-                ],
-                sprites: PokemonSprites(
-                    other: OtherSprites(
-                        officialArtwork: OfficialArtwork(
-                            front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
-                        )
-                    )
-                ),
-                abilities: [
-                    Ability(
-                        ability: BaseAbility(
-                            name: "blaze"
-                        )
-                    ),
-                    Ability(
-                        ability: BaseAbility(
-                            name: "solar power"
-                        )
-                    )
-                ],
-                stats: [],
-                height: 7,
-                weight: 69,
-                cries: Cry(
-                    latest: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg")!,
-                    legacy: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/1.ogg")!
-                )
-            )
-        ]
-        
+        mockViewModel.pokemons = [Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)]
+        mockViewModel.pokemonDetail = ["Charmeleon": createSamplePokemonDetail()]
         return mockViewModel
     }
     
@@ -60,8 +21,21 @@ struct MockData {
     }
     
     static func createSampleTypes() -> [PokemonTypes] {
-        return [.init(type: .init(name: "fire", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!)),
-                .init(type: .init(name: "Poison", url: URL(string: "https://pokeapi.co/api/v2/type/10/")!))]
+        return [
+            .init(
+                type: .init(
+                    name: "fire",
+                    url: URL(
+                        string: "https://pokeapi.co/api/v2/type/10/")!
+                )
+            ),
+            .init(
+                type: .init(
+                    name: "Poison",
+                    url: URL(string: "https://pokeapi.co/api/v2/type/10/")!
+                )
+            )
+        ]
     }
     
     static func createSamplePokemonDetail() -> PokemonDetail {
@@ -69,9 +43,11 @@ struct MockData {
             id: 5,
             name: "Charmeleon",
             types: [
-                PokemonTypes(type: PokemonType(name: "Fire",
-                                               url: URL(string: "https://pokeapi.co/api/v2/type/12/")!
-                                              )
+                PokemonTypes(
+                    type: PokemonType(
+                        name: "Fire",
+                        url: URL(string: "https://pokeapi.co/api/v2/type/12/")!
+                    )
                 )
             ], sprites: PokemonSprites(
                 other: OtherSprites(
@@ -96,8 +72,7 @@ struct MockData {
             height: 7,
             weight: 69,
             cries: Cry(
-                latest: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg")!,
-                legacy: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/1.ogg")!
+                latest: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg")!
             )
         )
     }

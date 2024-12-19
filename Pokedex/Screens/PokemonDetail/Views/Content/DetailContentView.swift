@@ -36,7 +36,7 @@ struct DetailContentView: View {
                 .padding()
                 .padding(.top, 40)
                 .background(Color.white)
-                .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             .padding(.top, 150)
             .background(
@@ -47,6 +47,7 @@ struct DetailContentView: View {
                         .frame(width: 175, height: 175)
                         .opacity(0.2)
                         .offset(x: 20, y: -65)
+                        .position(x: 300, y: 150)
                 }
             )
             PokemonImageView(url: pokemonDetail.sprites.other.officialArtwork.front_default)

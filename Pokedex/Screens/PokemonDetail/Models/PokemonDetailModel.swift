@@ -73,7 +73,6 @@ struct Stat: Codable {
 
 struct Cry: Codable {
     let latest: URL?
-    let legacy: URL?
 }
 
 enum DetailSegment: String, CaseIterable {
