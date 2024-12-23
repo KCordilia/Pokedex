@@ -32,10 +32,10 @@ struct PlayButton: View {
                 Triangle()
                     .fill(Color.white)
                     .frame(width: 24, height: 24)
-                    .offset(x: 3) // To center the triangle visually
+                    .offset(x: 3)
             }
         }
-        .scaleEffect(isPressed ? 0.9 : 1.0) // Add press effect
+        .scaleEffect(isPressed ? 0.9 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.5), value: isPressed)
         .buttonStyle(PlainButtonStyle())
     }

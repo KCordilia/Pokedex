@@ -68,7 +68,26 @@ struct MockData {
                     )
                 )
             ],
-            stats: [],
+            stats: [
+                BaseStat(
+                    baseStat: 65,
+                    stat: Stat(
+                        name: "hp"
+                    )
+                ),
+                BaseStat(
+                    baseStat: 65,
+                    stat: Stat(
+                        name: "defense"
+                    )
+                ),
+                BaseStat(
+                    baseStat: 65,
+                    stat: Stat(
+                        name: "speed"
+                    )
+                )
+            ],
             height: 7,
             weight: 69,
             cries: Cry(

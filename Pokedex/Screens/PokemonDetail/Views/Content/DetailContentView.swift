@@ -28,13 +28,14 @@ struct DetailContentView: View {
                         AboutView(pokemonDetail: pokemonDetail)
                             .frame(maxWidth: .infinity)
                     case .baseStats:
-                        BaseStatsView()
+                        BaseStatsView(pokemonDetail: pokemonDetail)
                     case .moves:
                         MovesView()
                     }
                 }
                 .padding()
                 .padding(.top, 40)
+                .padding(.bottom)
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
