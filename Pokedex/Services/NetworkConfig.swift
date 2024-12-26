@@ -31,6 +31,7 @@ enum APIEndpoint {
     case getPokemon
     case getPokemonDetail(String)
     case getImageUrl(Int)
+    case getPokemonSpecies(Int)
     
     var url: URL? {
         switch self {
@@ -42,6 +43,8 @@ enum APIEndpoint {
         case .getImageUrl(let id):
             guard let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png") else { return nil }
             return url
+        case .getPokemonSpecies(let id):
+            return NetworkConfig.url(for: "/pokemon-species/\(id)")
         }
     }
 }

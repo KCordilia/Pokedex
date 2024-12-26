@@ -8,31 +8,41 @@
 import SwiftUI
 
 struct AboutView: View {
+    @StateObject private var viewModel = AboutViewModel()
     let pokemonDetail: PokemonDetail
     private let cryPlayer = PokemonCryPlayer()
     
     var body: some View {
         VStack {
             HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    PokemonInfoHeaderText("Height")
-                    PokemonInfoHeaderText("Weight")
-                    PokemonInfoHeaderText("Abilities")
-                }
-                Spacer()
-                VStack(alignment: .leading, spacing: 8) {
-                    PokemonInfoValueText("\(pokemonDetail.formattedHeight)")
-                    PokemonInfoValueText("\(pokemonDetail.formattedWeight)")
-                    PokemonInfoValueText(pokemonDetail.abilities.map { $0.ability.name.capitalized }.joined(separator: ", "))
-                }
+                BaseInfoView(imageName: "scalemass", statValue: pokemonDetail.formattedWeight, statLabel: "Weight")
+                Divider()
+                    .frame(height: 70)
+                    .background(Color.gray)
+                BaseInfoView(imageName: "ruler", statValue: pokemonDetail.formattedHeight, statLabel: "Height", isRotated: true)
+                Divider()
+                    .frame(height: 70)
+                    .background(Color.gray)
+                AbilitiesView(pokemonDetail: pokemonDetail)
             }
-            .padding()
+            
+            Text(viewModel.getFlavorText())
+                .font(.system(size: 15))
+                .padding(.bottom)
+
+            
             PlayButton(typeColor: pokemonDetail.types.first?.name ?? "") {
                 if let url = pokemonDetail.cries.latest {
                     cryPlayer.playCry(from: url)
                 }
             }
         }
+        .onAppear {
+            Task {
+                await viewModel.fetchPokemonSpeciesInfo(for: pokemonDetail.id)
+            }
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 
