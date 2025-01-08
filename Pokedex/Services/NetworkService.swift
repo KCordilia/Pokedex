@@ -6,21 +6,30 @@
 //
 
 import Foundation
+import Apollo
+import ApolloAPI
 
 final class NetworkService {
+    private let apolloClient: ApolloClient
     
-    func fetchData<T: Decodable>(from endpoint: APIEndpoint, as type: T.Type) async throws -> T {
-        guard let url = endpoint.url else {
-            throw URLError(.badURL)
+    init() {
+        guard let url = URL(string: "https://beta.pokeapi.co/graphql/v1beta") else { fatalError("Invalid URL") }
+        self.apolloClient = ApolloClient(url: url)
+    }
+    
+    func fetch<T: GraphQLQuery>(query: T) async throws -> T.Data {
+        try await withCheckedThrowingContinuation { continuation in
+            apolloClient.fetch(query: query, cachePolicy: .returnCacheDataElseFetch) { result in
+                switch result {
+                case .success(let value):
+                    if let data = value.data {
+                        continuation.resume(returning: data)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
         }
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let decodedData = try JSONDecoder().decode(type, from: data)
-        
-        return decodedData
     }
 }
+

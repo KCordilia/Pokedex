@@ -1,0 +1,14 @@
+query GetAllPokemons {
+  pokemon_v2_pokemon(limit: 151) {
+    name
+    id
+    pokemon_v2_pokemonsprites {
+      sprites(path: "other.official-artwork.front_default")
+    }
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        name
+      }
+    }
+  }
+}

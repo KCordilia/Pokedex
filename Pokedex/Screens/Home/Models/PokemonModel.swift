@@ -7,19 +7,21 @@
 
 import Foundation
 
-struct PokemonResult: Codable {
-    let results: [Pokemon]
-}
-
 struct Pokemon: Codable {
+    let id: Int
     let name: String
-    let url: URL
-    
-    var id: Int {
-        Int(url.lastPathComponent) ?? 1
-    }
+    let sprites: PokemonSprites
+    let types: [PokemonType]
     
     var spriteUrl: URL? {
-        APIEndpoint.getImageUrl(id).url
+        URL(string: sprites.sprites)
     }
+}
+
+struct PokemonSprites: Codable {
+    let sprites: String
+}
+
+struct PokemonType: Codable {
+    let name: String
 }

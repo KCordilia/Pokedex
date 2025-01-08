@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AboutView: View {
-    @StateObject private var viewModel = AboutViewModel()
     let pokemonDetail: PokemonDetail
     private let cryPlayer = PokemonCryPlayer()
     
@@ -26,7 +25,7 @@ struct AboutView: View {
                 AbilitiesView(pokemonDetail: pokemonDetail)
             }
             
-            Text(viewModel.getFlavorText())
+            Text(pokemonDetail.flavorText)
                 .font(.system(size: 15))
                 .padding(.bottom)
 
@@ -35,11 +34,6 @@ struct AboutView: View {
                 if let url = pokemonDetail.cries.latest {
                     cryPlayer.playCry(from: url)
                 }
-            }
-        }
-        .onAppear {
-            Task {
-                await viewModel.fetchPokemonSpeciesInfo(for: pokemonDetail.id)
             }
         }
         .frame(maxWidth: .infinity)

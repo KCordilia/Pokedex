@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
@@ -13,25 +14,32 @@ struct HomeView: View {
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(viewModel.pokemons, id: \.name) { pokemon in
-                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
-                            PokemonCard(pokemon: pokemon)
+            switch viewModel.viewState {
+            case .loading:
+                LoadingView()
+            case .succes(let pokemons):
+                ScrollView {
+                    LazyVGrid(columns: columns) {
+                        ForEach(pokemons, id: \.name) { pokemon in
+                            NavigationLink(destination: PokemonDetailView(pokemonId: pokemon.id)) {
+                                PokemonCard(pokemon: pokemon)
+                            }
                         }
                     }
+                    .padding()
+                    
                 }
-                .padding()
-                
+            case .error:
+                Rectangle()
             }
-            .onAppear() {
-                Task {
-                    await viewModel.fetchPokemons()
-                }
-            }
-            .environmentObject(viewModel)
-            .navigationTitle("Pokedex")
         }
+        .onAppear() {
+            Task {
+                await viewModel.fetchPokemons()
+            }
+        }
+        .environmentObject(viewModel)
+        .navigationTitle("Pokedex")
     }
 }
 

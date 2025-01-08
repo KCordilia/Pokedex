@@ -11,28 +11,28 @@ import Foundation
 struct MockData {
     static func createMockHomeViewModel() -> HomeViewModel {
         let mockViewModel = HomeViewModel()
-        mockViewModel.pokemons = [Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)]
-        mockViewModel.pokemonDetail = ["Charmeleon": createSamplePokemonDetail()]
         return mockViewModel
     }
     
     static func createSamplePokemon() -> Pokemon {
-        return Pokemon(name: "Charmeleon", url: URL(string: "https://pokeapi.co/api/v2/pokemon/5/")!)
+        return Pokemon(
+            id: 1,
+            name: "Charmeleon",
+            sprites: .init(sprites: ""),
+            types: []
+        )
     }
     
     static func createSampleTypes() -> [PokemonTypes] {
         return [
             .init(
                 type: .init(
-                    name: "fire",
-                    url: URL(
-                        string: "https://pokeapi.co/api/v2/type/10/")!
-                )
+                    name: "fire"
+                    )
             ),
             .init(
                 type: .init(
-                    name: "Poison",
-                    url: URL(string: "https://pokeapi.co/api/v2/type/10/")!
+                    name: "Poison"
                 )
             )
         ]
@@ -45,17 +45,10 @@ struct MockData {
             types: [
                 PokemonTypes(
                     type: PokemonType(
-                        name: "Fire",
-                        url: URL(string: "https://pokeapi.co/api/v2/type/12/")!
+                        name: "Fire"
                     )
                 )
-            ], sprites: PokemonSprites(
-                other: OtherSprites(
-                    officialArtwork: OfficialArtwork(
-                        front_default: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png")!
-                    )
-                )
-            ),
+            ], sprites: PokemonSprites(sprites: ""),
             abilities: [
                 Ability(
                     ability: BaseAbility(
@@ -92,7 +85,8 @@ struct MockData {
             weight: 69,
             cries: Cry(
                 latest: URL(string: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg")!
-            )
+            ),
+            flavorText: ""
         )
     }
     

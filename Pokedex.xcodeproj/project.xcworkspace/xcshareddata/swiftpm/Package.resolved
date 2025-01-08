@@ -1,6 +1,33 @@
 {
-  "originHash" : "294b5443f2fd75dbed7a00528cc25cb27baf812b2346df53611fbd2af4f2803d",
+  "originHash" : "0456e5d616e2fcd88a9fb204df54f7c78c55fa6009c522750dac98730f858984",
   "pins" : [
+    {
+      "identity" : "apollo-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apollographql/apollo-ios",
+      "state" : {
+        "revision" : "c3f48d45ec1300bc95243bf19f67284f9dc0d14a",
+        "version" : "1.15.3"
+      }
+    },
+    {
+      "identity" : "lottie-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-spm.git",
+      "state" : {
+        "revision" : "8c6edf4f0fa84fe9c058600a4295eb0c01661c69",
+        "version" : "4.5.1"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
+        "version" : "0.15.3"
+      }
+    },
     {
       "identity" : "vlckit-spm",
       "kind" : "remoteSourceControl",
