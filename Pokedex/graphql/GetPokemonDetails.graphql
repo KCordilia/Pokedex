@@ -1,0 +1,35 @@
+query GetPokemonDetails($id: Int!) {
+  pokemon_v2_pokemon(where: {id: {_eq: $id }}) {
+    name
+    id
+    height
+    weight
+    pokemon_v2_pokemonsprites {
+      sprites(path: "other.official-artwork.front_default")
+    }
+    pokemon_v2_pokemonspecy {
+      pokemon_v2_pokemonspeciesflavortexts(order_by: {version_id: desc}, limit: 1, where: {pokemon_v2_language: {name: {_eq: "en"}}}) {
+        flavor_text
+      }
+    }
+    pokemon_v2_pokemonstats {
+      base_stat
+      pokemon_v2_stat {
+        name
+      }
+    }
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        name
+      }
+    }
+    pokemon_v2_pokemonabilities {
+      pokemon_v2_ability {
+        name
+      }
+    }
+    pokemon_v2_pokemoncries {
+      cries(path: "latest")
+    }
+  }
+}

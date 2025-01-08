@@ -9,29 +9,34 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @StateObject private var viewModel = PokemonDetailViewModel()
-    let pokemon: Pokemon
+    var pokemonId: Int
     
     var body: some View {
-        VStack(spacing: -20) {
-            if let pokemonDetail = viewModel.pokemonDetail {
-                DetailHeaderView(pokemonDetail: pokemonDetail)
-                DetailContentView(pokemonDetail: pokemonDetail)
+        VStack {
+            switch viewModel.viewState {
+            case .loading:
+                LoadingView()
+            case .succes(let pokemonDetail):
+                VStack(spacing: -20) {
+                    DetailHeaderView(pokemonDetail: pokemonDetail)
+                    DetailContentView(pokemonDetail: pokemonDetail)
+                    Spacer()
+                }
+                .background(.ultraThinMaterial)
+                .background(TypeColorMapper.getTypeColor(for: pokemonDetail.types.first?.name ?? ""))
+                .edgesIgnoringSafeArea(.bottom)
+            case .error:
+                Rectangle()
             }
-            Spacer()
         }
         .onAppear {
             Task {
-                await viewModel.fetchPokemonDetails(for: pokemon.name)
+                await viewModel.fetchPokemonsDetails(id: pokemonId)
             }
         }
-        .background(.ultraThinMaterial)
-        .background(TypeColorMapper.getTypeColor(for: viewModel.pokemonDetail?.types.first?.name ?? ""))
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 #Preview {
-    PokemonDetailView(
-        pokemon: MockData.createSamplePokemon()
-    )
+    PokemonDetailView(pokemonId: 1)
 }

@@ -51,7 +51,7 @@ struct DetailContentView: View {
                         .position(x: 300, y: 150)
                 }
             )
-            PokemonImageView(url: pokemonDetail.sprites.other.officialArtwork.front_default)
+            PokemonImageView(url: pokemonDetail.spriteUrl)
         }
     }
 }

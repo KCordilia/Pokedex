@@ -6,18 +6,25 @@
 //
 
 import Foundation
+import Pokeapi
 
 @MainActor
 class PokemonDetailViewModel: ObservableObject {
-    @Published var pokemonDetail: PokemonDetail?
+    @Published var viewState: ViewState<PokemonDetail> = .loading
     private let networkService = NetworkService()
     
-    func fetchPokemonDetails(for pokemonName: String) async {
+    func fetchPokemonsDetails(id: Int) async {
+        viewState = .loading
         do {
-            pokemonDetail = try await networkService.fetchData(from: .getPokemonDetail(pokemonName), as: PokemonDetail.self)
-            
+            let query = GetPokemonDetailsQuery(id: id)
+            let data = try await networkService.fetch(query: query)
+            if let pokemonDetail = PokemonDetailMapper.map(from: data.pokemon_v2_pokemon) {
+                viewState = .succes(pokemonDetail)
+            } else {
+                viewState = .error("Failed to map pokemonDetail")
+            }
         } catch {
-            print("failed to fetch pokemon details: \(error.localizedDescription)")
+            viewState = .error(error.localizedDescription)
         }
     }
 }

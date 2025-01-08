@@ -6,28 +6,31 @@
 //
 
 import Foundation
+import Pokeapi
+import Apollo
 
 @MainActor
 class HomeViewModel: ObservableObject {
-    @Published var pokemons: [Pokemon] = []
-    @Published var pokemonDetail: [String: PokemonDetail] = [:]
-    private let networkService = NetworkService()
+    @Published var viewState: ViewState<[Pokemon]> = .loading
+    private let networkService: NetworkService
+    
+    init(networkService: NetworkService = NetworkService()) {
+        self.networkService = networkService
+    }
     
     func fetchPokemons() async {
+        viewState = .loading
         do {
-            pokemons = try await networkService.fetchData(from: .getPokemon, as: PokemonResult.self).results
-            
-            for pokemon in pokemons {
-                let detail = try await networkService.fetchData(from: .getPokemonDetail(pokemon.name), as: PokemonDetail.self)
-                pokemonDetail[pokemon.name] = detail
-            }
+            let query = GetAllPokemonsQuery()
+            let data = try await networkService.fetch(query: query)
+            let pokemons = PokemonMapper.map(from: data.pokemon_v2_pokemon)
+            viewState = .succes(pokemons)
         } catch {
-            print("failed to fetch pokemon: \(error.localizedDescription)")
+            viewState = .error(error.localizedDescription)
         }
     }
     
-    func getTypes(for pokemon: Pokemon) -> [PokemonTypes] {
-        guard let types = pokemonDetail[pokemon.name]?.types else { return [] }
-        return types
+    func getTypes(for pokemon: Pokemon) -> [PokemonType] {
+        return pokemon.types
     }
 }

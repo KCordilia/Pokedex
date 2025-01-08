@@ -17,7 +17,7 @@ struct PokemonCard: View {
                 Text(pokemon.name.capitalized)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(Color.white)
-                ForEach(viewModel.getTypes(for: pokemon), id: \.type.name) { type in
+                ForEach(viewModel.getTypes(for: pokemon), id: \.name) { type in
                     TypeView(type: type.name)
                 }
             }

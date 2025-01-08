@@ -17,24 +17,12 @@ struct PokemonDetail: Codable {
     let height: Int
     let weight: Int
     let cries: Cry
-}
-
-struct PokemonSprites: Codable {
-    let other: OtherSprites
-}
-
-struct OtherSprites: Codable {
-    let officialArtwork: OfficialArtwork
+    let flavorText: String
     
-    enum CodingKeys: String, CodingKey {
-        case officialArtwork = "official-artwork"
+    var spriteUrl: URL? {
+        URL(string: sprites.sprites)
     }
 }
-
-struct OfficialArtwork: Codable {
-    let front_default: URL
-}
-
 
 struct PokemonTypes: Codable {
     let type: PokemonType
@@ -42,11 +30,6 @@ struct PokemonTypes: Codable {
     var name: String {
         return type.name
     }
-}
-
-struct PokemonType: Codable {
-    let name: String
-    let url: URL
 }
 
 struct Ability: Codable {
@@ -60,11 +43,6 @@ struct BaseAbility: Codable {
 struct BaseStat: Codable {
     let baseStat: Int
     let stat: Stat
-    
-    enum CodingKeys: String, CodingKey {
-        case baseStat = "base_stat"
-        case stat = "stat"
-    }
 }
 
 struct Stat: Codable {
