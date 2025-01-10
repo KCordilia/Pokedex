@@ -16,7 +16,7 @@ jobs:
       run: brew install swiftlint
 
     - name: Run SwiftLint
-      run: swiftlint
+      run: swiftlint lint --path "Sources" --exclude "Sources/Generated"
 
     - name: Build App
       run: xcodebuild build -schema Pokedex
