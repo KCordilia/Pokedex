@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PokemonCard: View {
-    @EnvironmentObject var viewModel: HomeViewModel
     let pokemon: Pokemon
     
     var body: some View {
@@ -17,7 +16,7 @@ struct PokemonCard: View {
                 Text(pokemon.name.capitalized)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(Color.white)
-                ForEach(viewModel.getTypes(for: pokemon), id: \.name) { type in
+                ForEach(pokemon.types, id: \.name) { type in
                     TypeView(type: type.name)
                 }
             }
@@ -44,14 +43,11 @@ struct PokemonCard: View {
             }
         )
         .background(.ultraThinMaterial)
-        .background(TypeColorMapper.getTypeColor(for: viewModel.getTypes(for: pokemon).first?.name ?? ""))
+        .background(TypeColorMapper.getTypeColor(for: pokemon.types.first?.name ?? ""))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 
-#Preview {
-    let mockViewModel = MockData.createMockHomeViewModel()
-    
+#Preview {    
     PokemonCard(pokemon: MockData.createSamplePokemon())
-        .environmentObject(mockViewModel)
 }

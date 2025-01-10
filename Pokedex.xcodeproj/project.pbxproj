@@ -12,6 +12,7 @@
 		8A2D2C4E2D26BA49004B6729 /* ApolloTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8A2D2C4D2D26BA49004B6729 /* ApolloTestSupport */; };
 		8A2D2CAE2D26BAFD004B6729 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 8A2D2CAD2D26BAFD004B6729 /* ApolloWebSocket */; };
 		8A2D2CBD2D26C0BF004B6729 /* Pokeapi in Frameworks */ = {isa = PBXBuildFile; productRef = 8A2D2CBC2D26C0BF004B6729 /* Pokeapi */; };
+		8A47CC042D2FE787003965BF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8A47CC032D2FE787003965BF /* ComposableArchitecture */; };
 		8A75623C2D2733D300B6AE54 /* Pokeapi in Frameworks */ = {isa = PBXBuildFile; productRef = 8A75623B2D2733D300B6AE54 /* Pokeapi */; };
 		8ACCB3602D2DC43600CDFB15 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACCB35F2D2DC43600CDFB15 /* Lottie */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 				8A2D2CBD2D26C0BF004B6729 /* Pokeapi in Frameworks */,
 				8A2D2CAE2D26BAFD004B6729 /* ApolloWebSocket in Frameworks */,
 				8A2077CF2D1304CB00B6251F /* VLCKitSPM in Frameworks */,
+				8A47CC042D2FE787003965BF /* ComposableArchitecture in Frameworks */,
 				8A2D2C4C2D26BA49004B6729 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +99,7 @@
 				8A2D2CBC2D26C0BF004B6729 /* Pokeapi */,
 				8A75623B2D2733D300B6AE54 /* Pokeapi */,
 				8ACCB35F2D2DC43600CDFB15 /* Lottie */,
+				8A47CC032D2FE787003965BF /* ComposableArchitecture */,
 			);
 			productName = Pokedex;
 			productReference = 8AA1B32D2CEB7C7200A45258 /* Pokedex.app */;
@@ -131,6 +134,7 @@
 				8A2D2C4A2D26BA49004B6729 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				8A75623A2D2733D300B6AE54 /* XCLocalSwiftPackageReference "Pokeapi" */,
 				8ACCB35E2D2DC43600CDFB15 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				8A47CC022D2FE787003965BF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8AA1B32E2CEB7C7200A45258 /* Products */;
@@ -402,6 +406,14 @@
 				minimumVersion = 1.15.3;
 			};
 		};
+		8A47CC022D2FE787003965BF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.17.1;
+			};
+		};
 		8ACCB35E2D2DC43600CDFB15 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -436,6 +448,11 @@
 		8A2D2CBC2D26C0BF004B6729 /* Pokeapi */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Pokeapi;
+		};
+		8A47CC032D2FE787003965BF /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A47CC022D2FE787003965BF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		8A75623B2D2733D300B6AE54 /* Pokeapi */ = {
 			isa = XCSwiftPackageProductDependency;

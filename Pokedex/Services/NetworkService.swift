@@ -8,6 +8,18 @@
 import Foundation
 import Apollo
 import ApolloAPI
+import Dependencies
+
+extension DependencyValues {
+    var networkService: NetworkService {
+        get { self[NetworkServiceKey.self] }
+        set { self[NetworkServiceKey.self] = newValue }
+    }
+}
+
+private enum NetworkServiceKey: DependencyKey {
+    static var liveValue = NetworkService()
+}
 
 final class NetworkService {
     private let apolloClient: ApolloClient
@@ -31,5 +43,9 @@ final class NetworkService {
             }
         }
     }
+}
+
+extension NetworkService: DependencyKey {
+    static var liveValue = NetworkService()
 }
 

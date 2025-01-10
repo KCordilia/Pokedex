@@ -7,42 +7,43 @@
 
 import SwiftUI
 import Lottie
+import ComposableArchitecture
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
+    let store: StoreOf<PokemonListFeature>
     
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+    
     var body: some View {
-        NavigationView {
-            switch viewModel.viewState {
-            case .loading:
-                LoadingView()
-            case .succes(let pokemons):
-                ScrollView {
-                    LazyVGrid(columns: columns) {
-                        ForEach(pokemons, id: \.name) { pokemon in
-                            NavigationLink(destination: PokemonDetailView(pokemonId: pokemon.id)) {
-                                PokemonCard(pokemon: pokemon)
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            NavigationView {
+                    if viewStore.isLoading {
+                        LoadingView()
+                    } else {
+                        ScrollView {
+                        LazyVGrid(columns: columns) {
+                            ForEach(viewStore.pokemons, id: \.name) { pokemon in
+                                NavigationLink(destination: PokemonDetailView(pokemonId: pokemon.id)) {
+                                    PokemonCard(pokemon: pokemon)
+                                }
                             }
                         }
                     }
-                    .padding()
-                    
                 }
-            case .error:
-                Rectangle()
             }
-        }
-        .onAppear() {
-            Task {
-                await viewModel.fetchPokemons()
+            .onAppear {
+                viewStore.send(.fetchPokemons)
             }
+            .navigationTitle("Pokedex")
         }
-        .environmentObject(viewModel)
-        .navigationTitle("Pokedex")
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(
+        store: Store(
+            initialState: PokemonListFeature.State()) {
+                PokemonListFeature()
+            }
+    )
 }

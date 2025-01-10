@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Pokemon: Codable {
+struct Pokemon: Codable, Equatable {
+    
     let id: Int
     let name: String
     let sprites: PokemonSprites
@@ -15,6 +16,10 @@ struct Pokemon: Codable {
     
     var spriteUrl: URL? {
         URL(string: sprites.sprites)
+    }
+    
+    static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+        lhs.id == rhs.id && lhs.name == rhs.name
     }
 }
 
