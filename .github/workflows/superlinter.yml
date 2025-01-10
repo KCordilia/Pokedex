@@ -1,17 +1,25 @@
-name: Super-Linter
+name: CI Pipeline
 
-on: push
+on:
+  push:
+    branches: 
+      - main
 
 jobs:
-  super-lint:
-  name: Lint code base
-  runs-on: ubuntu-latest
-  steps:
+  build-and-lint:
+    runs-on: macos-latest
+    steps:
     - name: Checkout code
-    uses: actions/checkout@v2
+      uses: actions/checkout@v3
+  
+    - name: Set up Xcode
+      run: xcode-select --switch /Applications/Xcode.app
+      
+    - name: Install SwiftLint
+      run: brew install swiftlint
 
-    - name: Run Super-Linter
-    uses: github/super-linter@v3
-    env:
-      DEFAULT_BRANCH: main
-      GITHUB_TOKEN: ${{ secrets.GITHIB_TOKEN }}
+    - name: Run SwiftLint
+      run: swiftlint
+
+    - name: Build App
+      run: xcodebuild build -schema Pokedex
