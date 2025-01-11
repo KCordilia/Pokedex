@@ -1,0 +1,6 @@
+excluded:
+    - "Pokeapi/"
+    - "Pokeapi/**/*.swift"
+
+disabled_rules:
+    - multiple_closures_with_trailing_closure
