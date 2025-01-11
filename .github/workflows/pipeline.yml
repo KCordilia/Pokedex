@@ -21,8 +21,5 @@ jobs:
     - name: Run SwiftLint
       run: swiftlint lint --config swiftlint.yml
 
-    - name: Resolve Dependencies
-      run: xcodebuild -resolvePackageDependencies -scheme Pokedex
-
     - name: Build App
-      run: xcodebuild build -scheme Pokedex
+      run: xcodebuild build -scheme Pokedex CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
