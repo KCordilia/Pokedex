@@ -8,12 +8,7 @@
 import Foundation
 
 @MainActor
-struct MockData {
-    static func createMockHomeViewModel() -> HomeViewModel {
-        let mockViewModel = HomeViewModel()
-        return mockViewModel
-    }
-    
+struct MockData {    
     static func createSamplePokemon() -> Pokemon {
         return Pokemon(
             id: 1,

@@ -6,37 +6,45 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct PokemonDetailView: View {
-    @StateObject private var viewModel = PokemonDetailViewModel()
-    var pokemonId: Int
-    
+    let store: StoreOf<PokemonDetailFeature>
+
     var body: some View {
-        VStack {
-            switch viewModel.viewState {
-            case .loading:
-                LoadingView()
-            case .succes(let pokemonDetail):
-                VStack(spacing: -20) {
-                    DetailHeaderView(pokemonDetail: pokemonDetail)
-                    DetailContentView(pokemonDetail: pokemonDetail)
-                    Spacer()
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            VStack {
+                switch viewStore.viewState {
+                case .loading:
+                    LoadingView()
+                case .success(let pokemonDetail):
+                    VStack(spacing: -20) {
+                        DetailHeaderView(pokemonDetail: pokemonDetail)
+                        DetailContentView(pokemonDetail: pokemonDetail)
+                        Spacer()
+                    }
+                    .background(.ultraThinMaterial)
+                    .background(
+                        TypeColorMapper.getTypeColor(for: pokemonDetail.types.first?.name ?? "")
+                    )
+                    .edgesIgnoringSafeArea(.bottom)
+                case .error(let errorMessage):
+                    VStack {
+                        Text("Error: \(errorMessage)")
+                            .foregroundColor(.red)
+                        Button("Retry") {
+                            viewStore.send(.fetchPokemonDetails(id: viewStore.pokemonId))
+                        }
+                    }
                 }
-                .background(.ultraThinMaterial)
-                .background(TypeColorMapper.getTypeColor(for: pokemonDetail.types.first?.name ?? ""))
-                .edgesIgnoringSafeArea(.bottom)
-            case .error:
-                Rectangle()
             }
-        }
-        .onAppear {
-            Task {
-                await viewModel.fetchPokemonsDetails(id: pokemonId)
+            .onAppear {
+                viewStore.send(.fetchPokemonDetails(id: viewStore.pokemonId))
             }
         }
     }
 }
 
 #Preview {
-    PokemonDetailView(pokemonId: 1)
+//    PokemonDetailView(pokemonId: 1)
 }

@@ -13,7 +13,9 @@ struct PokedexApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView(
-                store: Store(initialState: PokemonListFeature.State()) {PokemonListFeature()
+                store: Store(
+                    initialState: PokemonListFeature.State()
+                ) { PokemonListFeature()
                 }
             )
         }

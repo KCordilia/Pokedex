@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailContentView: View {
     let pokemonDetail: PokemonDetail
     @State private var selectedSegment: DetailSegment = .about
-    
+
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 16) {
@@ -22,7 +22,7 @@ struct DetailContentView: View {
                             set: { selectedSegment = DetailSegment.allCases[$0] }
                         )
                     )
-                    
+
                     switch selectedSegment {
                     case .about:
                         AboutView(pokemonDetail: pokemonDetail)

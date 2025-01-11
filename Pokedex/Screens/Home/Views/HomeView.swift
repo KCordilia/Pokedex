@@ -10,31 +10,38 @@ import Lottie
 import ComposableArchitecture
 
 struct HomeView: View {
-    let store: StoreOf<PokemonListFeature>
-    
+    @Bindable var store: StoreOf<PokemonListFeature>
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
-    
+
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            NavigationView {
-                    if viewStore.isLoading {
+        NavigationStackStore(self.store.scope(state: \.path, action: \.path)) {
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                VStack {
+                    switch viewStore.viewState {
+                    case .loading:
                         LoadingView()
-                    } else {
+                    case .success(let pokemons):
                         ScrollView {
-                        LazyVGrid(columns: columns) {
-                            ForEach(viewStore.pokemons, id: \.name) { pokemon in
-                                NavigationLink(destination: PokemonDetailView(pokemonId: pokemon.id)) {
-                                    PokemonCard(pokemon: pokemon)
+                            LazyVGrid(columns: columns) {
+                                ForEach(pokemons, id: \.name) { pokemon in
+                                    NavigationLink(state: PokemonDetailFeature.State(pokemonId: pokemon.id)) {
+                                        PokemonCard(pokemon: pokemon)
+                                    }
                                 }
                             }
                         }
+                    case .error(let error):
+                        Text("Error: \(error)")
+                            .foregroundColor(.red)
                     }
                 }
+                .onAppear {
+                    viewStore.send(.fetchPokemons)
+                }
+                .navigationTitle("Pokedex")
             }
-            .onAppear {
-                viewStore.send(.fetchPokemons)
-            }
-            .navigationTitle("Pokedex")
+        } destination: { store in
+            PokemonDetailView(store: store)
         }
     }
 }

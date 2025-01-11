@@ -15,21 +15,21 @@ struct PokemonListFeature {
     
     @ObservableState
     struct State: Equatable {
-        var pokemons: [Pokemon] = []
-        var isLoading: Bool = false
-        var errorMessage: String? = nil
+        var viewState: ViewState<[Pokemon]> = .loading
+        var path = StackState<PokemonDetailFeature.State>()
     }
     
-    enum Action {
+    enum Action: Equatable {
         case fetchPokemons
         case fetchPokemonsResponse(TaskResult<[Pokemon]>)
+        case path(StackAction<PokemonDetailFeature.State, PokemonDetailFeature.Action>)
     }
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .fetchPokemons:
-                state.isLoading = true
+                state.viewState = .loading
                 return .run { send in
                     do {
                         let query = GetAllPokemonsQuery()
@@ -44,14 +44,17 @@ struct PokemonListFeature {
             case .fetchPokemonsResponse(let result):
                 switch result {
                 case .success(let pokemons):
-                    state.pokemons = pokemons
-                    state.isLoading = false
+                    state.viewState = .success(pokemons)
                 case .failure(let error):
-                    state.errorMessage = error.localizedDescription
-                    state.isLoading = false
+                    state.viewState = .error(error.localizedDescription)
                 }
                 return .none
+            case .path:
+                return .none
             }
+        }
+        .forEach(\.path, action: \.path) {
+            PokemonDetailFeature()
         }
     }
 }
