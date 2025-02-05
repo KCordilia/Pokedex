@@ -21,6 +21,6 @@ struct TypeView: View {
 }
 
 #Preview {
-    TypeView(type: MockData.createSampleTypes().first!.name)
-    
+    TypeView(type: PreviewData.createSampleTypes().first!.name)
+
 }

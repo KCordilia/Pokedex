@@ -1,5 +1,5 @@
 //
-//  PokemonInfoHeaderText.swift
+//  PokemonInfoValueText.swift
 //  Pokedex
 //
 //  Created by Karim Cordilia on 18/12/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonInfoHeaderText: View {
+struct PokemonInfoValueText: View {
     let text: String
     
     init(_ text: String) {
@@ -17,10 +17,10 @@ struct PokemonInfoHeaderText: View {
     var body: some View {
         Text(text)
             .font(.system(size: 13))
-            .foregroundColor(Color.gray)
+            .foregroundColor(Color.black)
     }
 }
 
 #Preview {
-    PokemonInfoHeaderText("Height")
+    PokemonInfoValueText("7 cm")
 }
