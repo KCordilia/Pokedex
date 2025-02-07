@@ -14,7 +14,7 @@ let package = Package(
     .library(name: "Pokeapi", targets: ["Pokeapi"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.0.0"),
+    .package(url: "https://github.com/apollographql/apollo-ios", exact: "1.16.1"),
   ],
   targets: [
     .target(

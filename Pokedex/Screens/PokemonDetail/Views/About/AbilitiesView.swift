@@ -25,5 +25,5 @@ struct AbilitiesView: View {
 }
 
 #Preview {
-    AbilitiesView(pokemonDetail: MockData.createSamplePokemonDetail())
+    AbilitiesView(pokemonDetail: PreviewData.createSamplePokemonDetail())
 }

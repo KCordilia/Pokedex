@@ -9,7 +9,11 @@ import SwiftUI
 
 struct EmptyStateView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ContentUnavailableView(
+            "No Pokémon found",
+            systemImage: "tray.fill",
+            description: Text("It seems like there are no Pokémon available at the moment")
+        )
     }
 }
 

@@ -21,5 +21,5 @@ struct BaseStatsView: View {
 }
 
 #Preview {
-    BaseStatsView(pokemonDetail: MockData.createSamplePokemonDetail())
+    BaseStatsView(pokemonDetail: PreviewData.createSamplePokemonDetail())
 }

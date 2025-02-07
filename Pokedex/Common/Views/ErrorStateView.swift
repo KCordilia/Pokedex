@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct ErrorStateView: View {
+    let message: String
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ContentUnavailableView(
+            "Something went wrong",
+            systemImage: "exclamationmark.triangle.fill",
+            description: Text(message)
+        )
     }
 }
 
 #Preview {
-    ErrorStateView()
+    ErrorStateView(message: "test")
 }

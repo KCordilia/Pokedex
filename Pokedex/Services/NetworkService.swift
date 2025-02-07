@@ -11,21 +11,27 @@ import ApolloAPI
 import Dependencies
 
 extension DependencyValues {
-    var networkService: NetworkService {
+    var networkService: NetworkServiceProtocol {
         get { self[NetworkServiceKey.self] }
         set { self[NetworkServiceKey.self] = newValue }
     }
 }
 
 private enum NetworkServiceKey: DependencyKey {
-    static var liveValue = NetworkService()
+    static var liveValue: NetworkServiceProtocol = NetworkService()
+    static var testValue: NetworkServiceProtocol = MockNetworkService(checkQuery: { _ in })
 }
 
-final class NetworkService {
+protocol NetworkServiceProtocol {
+    func fetch<T: GraphQLQuery>(query: T) async throws -> T.Data
+}
+
+final class NetworkService: NetworkServiceProtocol {
     private let apolloClient: ApolloClient
     
     init() {
-        guard let url = URL(string: "https://beta.pokeapi.co/graphql/v1beta") else { fatalError("Invalid URL") }
+        let apiUrl = ProcessInfo.processInfo.environment["API_URL"] ?? ""
+        guard let url = URL(string: apiUrl) else { fatalError("Invalid URL") }
         self.apolloClient = ApolloClient(url: url)
     }
     
@@ -44,8 +50,3 @@ final class NetworkService {
         }
     }
 }
-
-extension NetworkService: DependencyKey {
-    static var liveValue = NetworkService()
-}
-

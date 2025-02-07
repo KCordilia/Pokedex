@@ -45,5 +45,5 @@ struct SegmentedControlView: View {
 }
 
 #Preview {
-    SegmentedControlView(segments: MockData.createMockSegments(), selectedIndex: .constant(0))
+    SegmentedControlView(segments: PreviewData.createMockSegments(), selectedIndex: .constant(0))
 }

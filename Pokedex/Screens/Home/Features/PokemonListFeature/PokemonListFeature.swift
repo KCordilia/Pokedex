@@ -42,12 +42,7 @@ struct PokemonListFeature {
                     
                 }
             case .fetchPokemonsResponse(let result):
-                switch result {
-                case .success(let pokemons):
-                    state.viewState = .success(pokemons)
-                case .failure(let error):
-                    state.viewState = .error(error.localizedDescription)
-                }
+                state.viewState = determineViewState(from: result)
                 return .none
             case .path:
                 return .none
@@ -55,6 +50,17 @@ struct PokemonListFeature {
         }
         .forEach(\.path, action: \.path) {
             PokemonDetailFeature()
+        }
+    }
+
+    private func determineViewState(from result: TaskResult<[Pokemon]>) -> ViewState<[Pokemon]> {
+        switch result {
+        case .success(let pokemons) where pokemons.isEmpty:
+            return .empty
+        case .success(let pokemons):
+            return .success(pokemons)
+        case .failure(let error):
+            return .error(error.localizedDescription)
         }
     }
 }

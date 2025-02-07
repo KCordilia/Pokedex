@@ -36,6 +36,8 @@ struct PokemonDetailView: View {
                             viewStore.send(.fetchPokemonDetails(id: viewStore.pokemonId))
                         }
                     }
+                case .empty:
+                    LoadingView()
                 }
             }
             .onAppear {

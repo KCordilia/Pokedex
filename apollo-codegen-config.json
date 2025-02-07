@@ -10,8 +10,7 @@
   },
   "output" : {
     "testMocks" : {
-      "none" : {
-      }
+        "none" : {}
     },
     "schemaTypes" : {
       "path" : "./Pokeapi",

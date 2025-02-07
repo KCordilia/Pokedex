@@ -30,9 +30,10 @@ struct HomeView: View {
                                 }
                             }
                         }
+                    case .empty:
+                        EmptyStateView()
                     case .error(let error):
-                        Text("Error: \(error)")
-                            .foregroundColor(.red)
+                        ErrorStateView(message: error)
                     }
                 }
                 .onAppear {

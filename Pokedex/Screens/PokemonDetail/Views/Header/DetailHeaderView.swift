@@ -40,6 +40,6 @@ struct DetailHeaderView: View {
 }
 
 #Preview {
-    DetailHeaderView(pokemonDetail: MockData.createSamplePokemonDetail())
+    DetailHeaderView(pokemonDetail: PreviewData.createSamplePokemonDetail())
         .background(Color.orange)
 }

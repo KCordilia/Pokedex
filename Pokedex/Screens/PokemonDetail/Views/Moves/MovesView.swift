@@ -10,7 +10,7 @@ import SwiftUI
 struct MovesView: View {
     var body: some View {
         VStack {
-            Text("kaka")
+            Text("test")
         }
         .background(Color.red)
     }

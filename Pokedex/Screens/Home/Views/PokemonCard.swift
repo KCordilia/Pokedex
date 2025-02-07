@@ -49,5 +49,5 @@ struct PokemonCard: View {
 }
 
 #Preview {    
-    PokemonCard(pokemon: MockData.createSamplePokemon())
+    PokemonCard(pokemon: PreviewData.createSamplePokemon())
 }

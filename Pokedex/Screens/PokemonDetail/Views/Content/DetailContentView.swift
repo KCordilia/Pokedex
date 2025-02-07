@@ -57,6 +57,6 @@ struct DetailContentView: View {
 }
 
 #Preview {
-    DetailContentView(pokemonDetail: MockData.createSamplePokemonDetail())
+    DetailContentView(pokemonDetail: PreviewData.createSamplePokemonDetail())
         .background(Color.orange)
 }

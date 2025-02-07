@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8AA1B32C2CEB7C7200A45258"
-               BuildableName = "Pokedex.app"
-               BlueprintName = "Pokedex"
-               ReferencedContainer = "container:Pokedex.xcodeproj">
+               BlueprintIdentifier = "Pokeapi"
+               BuildableName = "Pokeapi"
+               BlueprintName = "Pokeapi"
+               ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,19 +29,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8A4C2F362D367BCA00E89C5B"
-               BuildableName = "PokedexTests.xctest"
-               BlueprintName = "PokedexTests"
-               ReferencedContainer = "container:Pokedex.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -53,23 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8AA1B32C2CEB7C7200A45258"
-            BuildableName = "Pokedex.app"
-            BlueprintName = "Pokedex"
-            ReferencedContainer = "container:Pokedex.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "API_URL"
-            value = "https://beta.pokeapi.co/graphql/v1beta"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -77,16 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8AA1B32C2CEB7C7200A45258"
-            BuildableName = "Pokedex.app"
-            BlueprintName = "Pokedex"
-            ReferencedContainer = "container:Pokedex.xcodeproj">
+            BlueprintIdentifier = "Pokeapi"
+            BuildableName = "Pokeapi"
+            BlueprintName = "Pokeapi"
+            ReferencedContainer = "container:">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

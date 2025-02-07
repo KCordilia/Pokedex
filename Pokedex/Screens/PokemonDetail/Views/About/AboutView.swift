@@ -41,5 +41,5 @@ struct AboutView: View {
 }
 
 #Preview {
-    AboutView(pokemonDetail: MockData.createSamplePokemonDetail())
+    AboutView(pokemonDetail: PreviewData.createSamplePokemonDetail())
 }
